@@ -21,12 +21,3 @@ export function fetchMoviesById(id) {
     .then(response => response.data);
   return fetchMoviesId;
 }
-
-export function fetchMoviesCredits(id) {
-  const fetchMoviesCredits = axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=e00a8fe96730262954d4fe74242d0bb1&language=en-US`
-    )
-    .then(response => response.data);
-  return fetchMoviesCredits;
-}

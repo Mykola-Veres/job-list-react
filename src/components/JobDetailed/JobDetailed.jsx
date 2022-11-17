@@ -1,3 +1,4 @@
+import GoogleMaps from '../GoogleMaps/GoogleMaps';
 import { useLocation, useParams } from 'react-router-dom';
 import { LinkStyled, TitleStyled } from './JobDetailed.styled';
 // import ImageDummy from "../../images/ImageDummy.png";
@@ -49,7 +50,6 @@ export default function JobDetailed({ item }) {
     if (item) {
       const res = /\t/;
       const benefitsList = item.description.split(res);
-      // console.log('benefitsList', benefitsList[1]);
       const benefitsListItem = benefitsList[1].split('.');
       return benefitsListItem.slice(0, benefitsListItem.length - 1);
     }
@@ -81,8 +81,10 @@ export default function JobDetailed({ item }) {
               <p>{DescriptionSplit()[6]}</p>
 
               <ul>
-                {DescriptionBenefits().map(item => (
-                  <li>{item}</li>
+                {DescriptionBenefits().map((items, index) => (
+                  <li key={index}>
+                    <p>{items}</p>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -90,17 +92,35 @@ export default function JobDetailed({ item }) {
           </article>
           <section>
             <h2>Attached images</h2>
-            <img src="*" alt="r" />
+            {item.pictures.map((img, index) => (
+              <li key={index}>
+                <img src={img} alt={`pictures ${item.name}`} />
+              </li>
+            ))}
           </section>
           <section>
             <p>Employment type</p>
-            <ul></ul>
+            <ul>
+              {item.employment_type.map((employee, index) => (
+                <li key={index}>
+                  <p>{employee}</p>
+                </li>
+              ))}
+            </ul>
             <p>Benefits</p>
-            <ul></ul>
+            <ul>
+              {item.benefits.map((benefits, index) => (
+                <li key={index}>
+                  <p>{benefits}</p>
+                </li>
+              ))}
+            </ul>
           </section>
           <section>
             <h2>Contacts</h2>
-            <div>map</div>
+            <div>
+              <GoogleMaps location={item.location} />
+            </div>
           </section>
         </>
       )}
