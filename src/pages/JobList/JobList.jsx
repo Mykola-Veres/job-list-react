@@ -7,7 +7,7 @@ export default function JobList() {
   const { items, loading } = useFetchJobDataAPI();
 
   const [curranrJobsPage, setCurranrJobsPage] = useState(1);
-  const [jobsPerPage, setJobsPerPage] = useState(7);
+  const [jobsPerPage] = useState(7);
 
   const lastJobsIndex = curranrJobsPage * jobsPerPage;
   const firstJobIndex = lastJobsIndex - jobsPerPage;
@@ -16,13 +16,6 @@ export default function JobList() {
   function paginete(pageNumber) {
     setCurranrJobsPage(pageNumber + 1);
   }
-
-  // function nextPage() {
-  //   setCurranrJobsPage(prev => prev + 1);
-  // }
-  // function prevPage() {
-  //   setCurranrJobsPage(prev => prev - 1);
-  // }
 
   return (
     <div>

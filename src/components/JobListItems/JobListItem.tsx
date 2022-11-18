@@ -29,7 +29,7 @@ export default function JobListItem({items}: Props) {
 
     return(
     <ul>
-      {items && items.map(({id, address, description, email, name, phone, salary, title, createdAt }) =>
+      {items && items.map(({id, address, description, email, name, phone, salary, title, createdAt, location }) =>
         <NavLink
           // state={{from: location}}
           to={`/detailed/${id}`}
@@ -44,6 +44,7 @@ export default function JobListItem({items}: Props) {
         )}
           <p>{title ?? name ?? name}</p>
           <p>{new Date(createdAt).toLocaleDateString()}</p>
+          <p>{}</p>
         </NavLink>)}
     </ul>
     )}

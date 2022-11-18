@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export default function JobListPagination({
@@ -45,7 +44,9 @@ export default function JobListPagination({
             </li>
           ))}
       </ul>
-      <button onClick={prevPage}>prev page</button>
+      <button onClick={prevPage} disabled={false}>
+        prev page
+      </button>
       <button onClick={nextPage} disabled={false}>
         next page
       </button>
