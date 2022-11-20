@@ -6,6 +6,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import Loader from '../Loader';
 import JobList from '../../pages/JobList';
 import JobDetailedPage from 'pages/DetailedJob/DetailedJob';
+import { GlobalStyle } from 'common/GlobalStyle';
+import Container from 'components/Conteiner/Conteiner';
 // import DetailedJob from 'pages/DetailedJob';
 
 // const HomePage = lazy(() => import("../../pages/HomePage"));
@@ -16,10 +18,14 @@ import JobDetailedPage from 'pages/DetailedJob/DetailedJob';
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<JobList />} />
-      <Route path="/detailed/:jobId" element={<JobDetailedPage />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <Container>
+      <GlobalStyle/>
+      <Routes>
+        <Route path="/" element={<JobList />} />
+        <Route path="/detailed/:jobId" element={<JobDetailedPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Container>
+
   );
 }

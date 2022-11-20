@@ -1,8 +1,7 @@
 import GoogleMaps from '../GoogleMaps/GoogleMaps';
 import { useLocation, useParams } from 'react-router-dom';
-import { LinkStyled, TitleStyled } from './JobDetailed.styled';
 // import ImageDummy from "../../images/ImageDummy.png";
-import { useEffect } from 'react';
+import { getNumberOfDays } from 'utils/countDay';
 
 // type Item = {
 //   address: string;
@@ -56,57 +55,6 @@ export default function JobDetailed({ item }) {
     }
   }
 
-  useEffect(() => {
-    const date = item.updatedAt;
-    const d = new Date();
-    console.log('date', date);
-    console.log('d', d);
-    const date3 = Date.parse(date);
-    console.log('date3', date3);
-    console.log('date4', Date.now());
-    const date5 = Date.now() - date3;
-    console.log('date5', date5);
-    // const date6 = new Date(date5);
-    // console.log('date6', date6.getDate());
-    console.log(convertMs(date5));
-    console.log(getNumberOfDays(date3, Date.now()));
-  }, []);
-
-  function convertMs(ms) {
-    // Number of milliseconds per unit of time
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
-
-    // Remaining days
-    const days = Math.floor(ms / day);
-    // Remaining hours
-    const hours = Math.floor((ms % day) / hour);
-    // Remaining minutes
-    const minutes = Math.floor(((ms % day) % hour) / minute);
-    // Remaining seconds
-    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
-    return { days, hours, minutes, seconds };
-  }
-
-  function getNumberOfDays(start, end) {
-    const date1 = new Date(start);
-    const date2 = new Date(end);
-
-    // One day in milliseconds
-    const oneDay = 1000 * 60 * 60 * 24;
-
-    // Calculating the time difference between two dates
-    const diffInTime = date2.getTime() - date1.getTime();
-
-    // Calculating the no. of days between two dates
-    const diffInDays = Math.round(diffInTime / oneDay);
-
-    return diffInDays;
-  }
-
   return (
     <>
       <header>
@@ -122,10 +70,13 @@ export default function JobDetailed({ item }) {
           <article>
             <h3>{item.title}</h3>
             <div>
-              <p>Brutto, per year</p>
               <p>{item.salary}</p>
+              <p>Brutto, per year</p>
             </div>
-
+            <p>{`Posted ${getNumberOfDays(
+              item.updatedAt,
+              Date.now()
+            )} days ago`}</p>
             <div>
               <p>{DescriptionSplit()[1]}</p>
               <p>{DescriptionSplit()[3]}</p>

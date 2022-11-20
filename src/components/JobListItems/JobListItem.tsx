@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { getNumberOfDays } from 'utils/countDay';
+import { ImageJobConteinerStyled, ImageJobStyled, ItemJobStyled, JobDateStyled, JobTextStyled, ListJobStyled, TitleJobStyled } from './JobListItem.styled';
 // import { useLocation } from "react-router-dom";
-// import {ListMoviesStyled, ItemMoviesStyled, ImageFilmStyled, MovieTextStyled} from "./JobListItem.styled";
 // import noFilm from '../../images/noFilm.jpg';
 
 type Item = {
@@ -18,29 +19,57 @@ type Item = {
   salary: string;
   title: string;
   updatedAt: string;
-}
+};
 
 interface Props {
-  items: Item[]
+  items: Item[];
 }
 
-export default function JobListItem({items}: Props) {
+export default function JobListItem({ items }: Props) {
+  return (
+    <ListJobStyled>
+      {items &&
+        items.map(
+          ({
+            id,
+            address,
+            email,
+            name,
+            updatedAt,
+            phone,
+            salary,
+            title,
+            createdAt,
+            location,
+            pictures,
+          }) => (
+            <ItemJobStyled to={`/detailed/${id}`} key={id}>
+              <ImageJobConteinerStyled>
+                {<ImageJobStyled src={pictures[0]} alt={name} /> || (
+                  <ImageJobStyled src="{noImage}" alt="no pictures" />
+                )}
+              </ImageJobConteinerStyled>
 
-    return(
-    <ul>
-      {items && items.map(({id, address, email, name,updatedAt, phone, salary, title, createdAt, location, pictures }) =>
-        <NavLink
-          to={`/detailed/${id}`}
-          key={id}>
-            {<img src={pictures[0]} alt={name}/> || (
-          <img src="{noImage}" alt="no pictures" />
+              <div>
+                <TitleJobStyled>{title}</TitleJobStyled>
+                <div>
+                  <JobTextStyled>{name}</JobTextStyled>&#xB7;
+                  <JobTextStyled>{email}</JobTextStyled>
+                </div>
+                <div>
+                  <JobTextStyled>{address}</JobTextStyled>
+                </div>
+
+                <div>
+                  <JobDateStyled>{`Posted ${getNumberOfDays(
+                    updatedAt,
+                    Date.now()
+                  )} days ago`}</JobDateStyled>
+                </div>
+              </div>
+            </ItemJobStyled>
+          )
         )}
-        <h2>{title}</h2>
-          <p>{name}</p>
-          <p>{email}</p>
-          <p>{new Date(createdAt).toLocaleDateString()}</p>
-          <p>{new Date(updatedAt).toLocaleDateString()}</p>
-          <p>{address}</p>
-        </NavLink>)}
-    </ul>
-    )}
+    </ListJobStyled>
+  );
+}

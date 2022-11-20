@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
+import 'normalize.css';
+
 // import './index.css';
 // import { ToTop } from './components/ScrollToTop/ScrollToTop';
 // import { theme } from './common/theme';
