@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import JobListItem from '../../components/JobListItems';
 import { useFetchJobDataAPI } from '../../hooks/useFetchJobDataAPI';
 import JobListPagination from 'components/JobListPagination';
@@ -19,8 +19,7 @@ export default function JobList() {
 
   return (
     <div>
-      <h1>ghjjjjjjjjjjjjjjjjvn</h1>
-      {/* <TitleStyled>Trending today</TitleStyled>
+      {/*
       {loading && <Loader/>}
       */}
       {items && (

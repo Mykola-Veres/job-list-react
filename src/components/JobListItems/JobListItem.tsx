@@ -25,26 +25,22 @@ interface Props {
 }
 
 export default function JobListItem({items}: Props) {
-  // const location = useLocation();
 
     return(
     <ul>
-      {items && items.map(({id, address, description, email, name, phone, salary, title, createdAt, location }) =>
+      {items && items.map(({id, address, email, name,updatedAt, phone, salary, title, createdAt, location, pictures }) =>
         <NavLink
-          // state={{from: location}}
           to={`/detailed/${id}`}
           key={id}>
-            {address ? (
-          <img
-            // src={`https://image.tmdb.org/t/p/w300${backdrop_path}`}
-            alt="ImageFilm"
-          />
-        ) : (
-          <img src="{noFilm}" alt="no Film" />
+            {<img src={pictures[0]} alt={name}/> || (
+          <img src="{noImage}" alt="no pictures" />
         )}
-          <p>{title ?? name ?? name}</p>
+        <h2>{title}</h2>
+          <p>{name}</p>
+          <p>{email}</p>
           <p>{new Date(createdAt).toLocaleDateString()}</p>
-          <p>{}</p>
+          <p>{new Date(updatedAt).toLocaleDateString()}</p>
+          <p>{address}</p>
         </NavLink>)}
     </ul>
     )}
