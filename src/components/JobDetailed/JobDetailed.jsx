@@ -2,6 +2,7 @@ import GoogleMaps from '../GoogleMaps/GoogleMaps';
 import { useLocation, useParams } from 'react-router-dom';
 // import ImageDummy from "../../images/ImageDummy.png";
 import { getNumberOfDays } from 'utils/countDay';
+import { Bookmarker } from 'assets/Bookmark';
 
 // type Item = {
 //   address: string;
@@ -124,6 +125,7 @@ export default function JobDetailed({ item }) {
             <div>
               <GoogleMaps location={item.location} />
             </div>
+            <Bookmarker />
           </section>
         </>
       )}

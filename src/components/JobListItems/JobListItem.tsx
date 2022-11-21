@@ -1,6 +1,26 @@
+import { Bookmarker } from 'assets/Bookmark';
+import { Location } from 'assets/Location';
+import { Rating } from 'assets/Rating';
 import { NavLink } from 'react-router-dom';
 import { getNumberOfDays } from 'utils/countDay';
-import { ImageJobConteinerStyled, ImageJobStyled, ItemJobStyled, JobDateStyled, JobTextStyled, ListJobStyled, TitleJobStyled } from './JobListItem.styled';
+import {
+  BookmarkerStyled,
+  ConteinerStyled,
+  IconConteinerStyled,
+  ImageJobConteinerStyled,
+  ImageJobStyled,
+  ItemJobStyled,
+  JobConteinerStyled,
+  JobDateConteinerStyled,
+  JobDateStyled,
+  JobTextStyled,
+  ListJobStyled,
+  LocationConteinerStyled,
+  RatingConreinerStyled,
+  TextAddressConteinerStyled,
+  TextConteinerStyled,
+  TitleJobStyled,
+} from './JobListItem.styled';
 // import { useLocation } from "react-router-dom";
 // import noFilm from '../../images/noFilm.jpg';
 
@@ -44,29 +64,49 @@ export default function JobListItem({ items }: Props) {
             pictures,
           }) => (
             <ItemJobStyled to={`/detailed/${id}`} key={id}>
-              <ImageJobConteinerStyled>
-                {<ImageJobStyled src={pictures[0]} alt={name} /> || (
-                  <ImageJobStyled src="{noImage}" alt="no pictures" />
-                )}
-              </ImageJobConteinerStyled>
+              <JobConteinerStyled>
+                <ImageJobConteinerStyled>
+                  {<ImageJobStyled src={pictures[0]} alt={name} /> || (
+                    <ImageJobStyled src="{noImage}" alt="no pictures" />
+                  )}
+                </ImageJobConteinerStyled>
 
-              <div>
-                <TitleJobStyled>{title}</TitleJobStyled>
-                <div>
-                  <JobTextStyled>{name}</JobTextStyled>&#xB7;
-                  <JobTextStyled>{email}</JobTextStyled>
-                </div>
-                <div>
-                  <JobTextStyled>{address}</JobTextStyled>
-                </div>
+                <ConteinerStyled>
+                  <div>
+                    <TitleJobStyled>{title}</TitleJobStyled>
+                    <TextConteinerStyled>
+                      <JobTextStyled>{name}</JobTextStyled>
 
-                <div>
-                  <JobDateStyled>{`Posted ${getNumberOfDays(
-                    updatedAt,
-                    Date.now()
-                  )} days ago`}</JobDateStyled>
-                </div>
-              </div>
+                      <JobTextStyled>
+                        {', '} {email}
+                      </JobTextStyled>
+                    </TextConteinerStyled>
+                    <LocationConteinerStyled>
+                      <Location />
+                      <TextAddressConteinerStyled>
+                        <JobTextStyled>{address}</JobTextStyled>
+                      </TextAddressConteinerStyled>
+                    </LocationConteinerStyled>
+                  </div>
+
+                  <IconConteinerStyled>
+                    <div>
+                      <BookmarkerStyled>
+                        <Bookmarker />
+                      </BookmarkerStyled>
+                      <RatingConreinerStyled>
+                        <Rating />
+                      </RatingConreinerStyled>
+                    </div>
+                    <JobDateConteinerStyled>
+                      <JobDateStyled>{`Posted ${getNumberOfDays(
+                        updatedAt,
+                        Date.now()
+                      )} days ago`}</JobDateStyled>
+                    </JobDateConteinerStyled>
+                  </IconConteinerStyled>
+                </ConteinerStyled>
+              </JobConteinerStyled>
             </ItemJobStyled>
           )
         )}
