@@ -1,7 +1,7 @@
 import { Bookmarker } from 'assets/Bookmark';
 import { Location } from 'assets/Location';
 import { Rating } from 'assets/Rating';
-import { NavLink } from 'react-router-dom';
+import { Ratings } from 'assets/Ratings';
 import { getNumberOfDays } from 'utils/countDay';
 import {
   BookmarkerStyled,
@@ -17,6 +17,7 @@ import {
   ListJobStyled,
   LocationConteinerStyled,
   RatingConreinerStyled,
+  RatingsConreinerStyled,
   TextAddressConteinerStyled,
   TextConteinerStyled,
   TitleJobStyled,
@@ -97,6 +98,9 @@ export default function JobListItem({ items }: Props) {
                       <RatingConreinerStyled>
                         <Rating />
                       </RatingConreinerStyled>
+                      <RatingsConreinerStyled>
+                        <Ratings />
+                      </RatingsConreinerStyled>
                     </div>
                     <JobDateConteinerStyled>
                       <JobDateStyled>{`Posted ${getNumberOfDays(
