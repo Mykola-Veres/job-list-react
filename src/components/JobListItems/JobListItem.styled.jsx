@@ -8,6 +8,8 @@ export const ListJobStyled = styled.ul`
   flex-direction: column;
   padding-top: 29px;
   padding-bottom: 49px;
+  padding-left: 9px;
+  padding-right: 9px;
   margin-left: auto;
   margin-right: auto;
   gap: 8px;

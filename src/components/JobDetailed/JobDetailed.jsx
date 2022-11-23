@@ -3,6 +3,38 @@ import { useLocation, useParams } from 'react-router-dom';
 // import ImageDummy from "../../images/ImageDummy.png";
 import { getNumberOfDays } from 'utils/countDay';
 import { Bookmarker } from 'assets/Bookmark';
+import { Share } from 'assets/Share';
+import {
+  ArticleConteinerStyled,
+  ButtonConteinerStyled,
+  ButtonStyled,
+  DateConteinerStyled,
+  DateTextStyled,
+  DecorationConteinerStyled,
+  HeaderConteinerStyled,
+  ImgItemStyled,
+  ImgListStyled,
+  ImgStyled,
+  ImgTitleStyled,
+  ItemDecorationStyled,
+  ItemTextStyled,
+  MainConteinerStyled,
+  NavLinksConteinerStyled,
+  NavLinksStyled,
+  NavLinksTextStyled,
+  PayConteinerStyled,
+  PayTextStyled,
+  SalaryConteinerStyled,
+  SalaryTextStyled,
+  SectionImgConteinerStyled,
+  SubTitleTextStyled,
+  TextBenefitsStyled,
+  TextStyled,
+  TitleInfoStyled,
+  TitleStyled,
+  TitleTextStyled,
+} from './JobDetailed.styled';
+import { Bullet } from 'assets/Bullet';
 
 // type Item = {
 //   address: string;
@@ -37,8 +69,6 @@ export default function JobDetailed({ item }) {
   const { movieId } = useParams();
   const locationCast = useLocation();
 
-  console.log(item);
-
   function DescriptionSplit() {
     if (item) {
       const res = /\n/;
@@ -55,54 +85,75 @@ export default function JobDetailed({ item }) {
       return benefitsListItem.slice(0, benefitsListItem.length - 1);
     }
   }
-
   return (
-    <>
-      <header>
-        <h2>Job Details</h2>
-        <div>
-          <a href="*">Save to my list</a>
-          <a href="*">Share</a>
-        </div>
-      </header>
+    <MainConteinerStyled>
+      <HeaderConteinerStyled>
+        <TitleStyled>Job Details</TitleStyled>
+        <NavLinksConteinerStyled>
+          <NavLinksStyled href="*">
+            <Bookmarker />{' '}
+            <NavLinksTextStyled>Save to my list</NavLinksTextStyled>
+          </NavLinksStyled>
+
+          <NavLinksStyled href="*">
+            <Share />
+            <NavLinksTextStyled>Share</NavLinksTextStyled>
+          </NavLinksStyled>
+        </NavLinksConteinerStyled>
+      </HeaderConteinerStyled>
 
       {item && (
         <>
-          <article>
-            <h3>{item.title}</h3>
-            <div>
-              <p>{item.salary}</p>
-              <p>Brutto, per year</p>
-            </div>
-            <p>{`Posted ${getNumberOfDays(
-              item.updatedAt,
-              Date.now()
-            )} days ago`}</p>
-            <div>
-              <p>{DescriptionSplit()[1]}</p>
-              <p>{DescriptionSplit()[3]}</p>
-              <p>{DescriptionSplit()[4]}</p>
-              <p>{DescriptionSplit()[6]}</p>
+          <ArticleConteinerStyled>
+            <TitleTextStyled>{item.title}</TitleTextStyled>
+            <PayConteinerStyled>
+              <SalaryConteinerStyled>
+                <SalaryTextStyled>{item.salary}</SalaryTextStyled>
+                <PayTextStyled>Brutto, per year</PayTextStyled>
+              </SalaryConteinerStyled>
+              <DateConteinerStyled>
+                <DateTextStyled>
+                  {`Posted ${getNumberOfDays(
+                    item.updatedAt,
+                    Date.now()
+                  )} days ago`}
+                </DateTextStyled>
+              </DateConteinerStyled>
+            </PayConteinerStyled>
+
+            <DecorationConteinerStyled>
+              <TextStyled>{DescriptionSplit()[1]}</TextStyled>
+              <SubTitleTextStyled>{DescriptionSplit()[3]}</SubTitleTextStyled>
+              <TextStyled>{DescriptionSplit()[4]}</TextStyled>
+              <SubTitleTextStyled>{DescriptionSplit()[6]}</SubTitleTextStyled>
 
               <ul>
                 {DescriptionBenefits().map((items, index) => (
-                  <li key={index}>
-                    <p>{items}</p>
-                  </li>
+                  <ItemTextStyled key={index}>
+                    <ItemDecorationStyled>
+                      <Bullet></Bullet>
+                    </ItemDecorationStyled>
+                    <TextBenefitsStyled>{items}</TextBenefitsStyled>
+                  </ItemTextStyled>
                 ))}
               </ul>
-            </div>
-            <button>Apply now</button>
-          </article>
+            </DecorationConteinerStyled>
+            <ButtonConteinerStyled>
+              <ButtonStyled>Apply now</ButtonStyled>
+            </ButtonConteinerStyled>
+          </ArticleConteinerStyled>
+          <SectionImgConteinerStyled>
+            <ImgTitleStyled>Attached images</ImgTitleStyled>
+            <ImgListStyled>
+              {item.pictures.map((img, index) => (
+                <ImgItemStyled key={index}>
+                  <ImgStyled src={img} alt={`pictures ${item.name}`} />
+                </ImgItemStyled>
+              ))}
+            </ImgListStyled>
+          </SectionImgConteinerStyled>
           <section>
-            <h2>Attached images</h2>
-            {item.pictures.map((img, index) => (
-              <li key={index}>
-                <img src={img} alt={`pictures ${item.name}`} />
-              </li>
-            ))}
-          </section>
-          <section>
+            <TitleInfoStyled>Additional info</TitleInfoStyled>
             <p>Employment type</p>
             <ul>
               {item.employment_type.map((employee, index) => (
@@ -120,15 +171,16 @@ export default function JobDetailed({ item }) {
               ))}
             </ul>
           </section>
-          <section>
-            <h2>Contacts</h2>
-            <div>
-              <GoogleMaps location={item.location} />
-            </div>
-            <Bookmarker />
-          </section>
         </>
       )}
-    </>
+      {item && (
+        <section>
+          <h2>Contacts</h2>
+          <div>
+            <GoogleMaps location={item.location} />
+          </div>
+        </section>
+      )}
+    </MainConteinerStyled>
   );
 }

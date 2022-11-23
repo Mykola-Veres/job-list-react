@@ -51,19 +51,7 @@ export default function JobListItem({ items }: Props) {
     <ListJobStyled>
       {items &&
         items.map(
-          ({
-            id,
-            address,
-            email,
-            name,
-            updatedAt,
-            phone,
-            salary,
-            title,
-            createdAt,
-            location,
-            pictures,
-          }) => (
+          ({ id, address, email, name, updatedAt, title, pictures }) => (
             <ItemJobStyled to={`/detailed/${id}`} key={id}>
               <JobConteinerStyled>
                 <ImageJobConteinerStyled>
