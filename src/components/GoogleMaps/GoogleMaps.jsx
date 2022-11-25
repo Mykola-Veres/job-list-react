@@ -1,18 +1,23 @@
 import {
   GoogleMap,
-  InfoBox,
   InfoWindow,
   MarkerF,
   useJsApiLoader,
 } from '@react-google-maps/api';
-import { MapConteinerStyled } from './GoogleMaps.styled';
+import {
+  ContactsStyled,
+  InfoWindowStyled,
+  MapConteinerStyled,
+  MapSectionConteinerStyled,
+} from './GoogleMaps.styled';
 import { defaultTheme } from './Theme';
 import { useEffect, useState } from 'react';
 import * as JobDataAPI from '../../services/fetchJobData';
 
 const containerStyle = {
-  width: '372px',
-  height: '436px',
+  borderRadius: '8px',
+  width: '100%',
+  height: '100%',
 };
 
 const defaultOption = {
@@ -30,7 +35,7 @@ const defaultOption = {
   styles: defaultTheme,
 };
 
-export default function GoogleMaps({ location }) {
+export default function GoogleMaps({ location, email, phone }) {
   const [locations, setLocations] = useState('');
   const initialValue = {
     lat: location.lat,
@@ -59,47 +64,40 @@ export default function GoogleMaps({ location }) {
   console.log('locations', locations);
 
   return (
-    <>
-      {isLoaded ? (
-        <MapConteinerStyled>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={initialValue}
-            zoom={10}
-            options={defaultOption}
-            tilt={1}
-          >
-            <InfoBox position={initialValue}>
-              <div
-                style={{
-                  backgroundColor: 'yellow',
-                  opacity: 0.75,
-                  padding: 12,
-                }}
-              >
-                <div style={{ fontSize: 16, fontColor: `#08233B` }}>
-                  Hello, World!
-                </div>
-              </div>
-            </InfoBox>
-            <InfoWindow position={initialValue}>
-              <div>
-                <h2>{locations}</h2>
-              </div>
-            </InfoWindow>
-            <>
-              <MarkerF
-                position={initialValue}
-                opacity={1}
-                visible={true}
-                zIndex={99}
-              />
-            </>
-          </GoogleMap>
-        </MapConteinerStyled>
-      ) : (
-        <h2>Loading...</h2>
-      )}
-    </>
+    <MapSectionConteinerStyled>
+      <ContactsStyled>Contacts</ContactsStyled>
+      <div>
+        {isLoaded ? (
+          <MapConteinerStyled>
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={initialValue}
+              zoom={10}
+              options={defaultOption}
+              tilt={1}
+            >
+              <InfoWindow position={initialValue}>
+                <InfoWindowStyled>
+                  <h3>{locations || 'locations Not found'}</h3>
+                  <p>{email}</p>
+                  <p>{phone}</p>
+                </InfoWindowStyled>
+              </InfoWindow>
+
+              <>
+                <MarkerF
+                  position={initialValue}
+                  opacity={1}
+                  visible={true}
+                  zIndex={99}
+                />
+              </>
+            </GoogleMap>
+          </MapConteinerStyled>
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </div>
+    </MapSectionConteinerStyled>
   );
 }

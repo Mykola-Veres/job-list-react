@@ -6,11 +6,20 @@ import { Bookmarker } from 'assets/Bookmark';
 import { Share } from 'assets/Share';
 import {
   ArticleConteinerStyled,
+  BenefitsItemStyled,
+  BenefitsListStyled,
+  BenefitsStyled,
+  BenefitsTextStyled,
+  ButtonConteinerDescktopStyled,
   ButtonConteinerStyled,
   ButtonStyled,
   DateConteinerStyled,
   DateTextStyled,
   DecorationConteinerStyled,
+  EmploymentTypeItemStyled,
+  EmploymentTypeListStyled,
+  EmploymentTypeStyled,
+  EmploymentTypeTextStyled,
   HeaderConteinerStyled,
   ImgItemStyled,
   ImgListStyled,
@@ -27,6 +36,7 @@ import {
   SalaryConteinerStyled,
   SalaryTextStyled,
   SectionImgConteinerStyled,
+  SectionImgInfoPositionStyled,
   SubTitleTextStyled,
   TextBenefitsStyled,
   TextStyled,
@@ -87,99 +97,107 @@ export default function JobDetailed({ item }) {
   }
   return (
     <MainConteinerStyled>
-      <HeaderConteinerStyled>
-        <TitleStyled>Job Details</TitleStyled>
-        <NavLinksConteinerStyled>
-          <NavLinksStyled href="*">
-            <Bookmarker />{' '}
-            <NavLinksTextStyled>Save to my list</NavLinksTextStyled>
-          </NavLinksStyled>
+      <div>
+        <HeaderConteinerStyled>
+          <TitleStyled>Job Details</TitleStyled>
+          <NavLinksConteinerStyled>
+            <NavLinksStyled href="*">
+              <Bookmarker />{' '}
+              <NavLinksTextStyled>Save to my list</NavLinksTextStyled>
+            </NavLinksStyled>
 
-          <NavLinksStyled href="*">
-            <Share />
-            <NavLinksTextStyled>Share</NavLinksTextStyled>
-          </NavLinksStyled>
-        </NavLinksConteinerStyled>
-      </HeaderConteinerStyled>
+            <NavLinksStyled href="*">
+              <Share />
+              <NavLinksTextStyled>Share</NavLinksTextStyled>
+            </NavLinksStyled>
+          </NavLinksConteinerStyled>
+        </HeaderConteinerStyled>
+        <ButtonConteinerDescktopStyled>
+          <ButtonStyled>Apply now</ButtonStyled>
+        </ButtonConteinerDescktopStyled>
 
+        {item && (
+          <>
+            <ArticleConteinerStyled>
+              <TitleTextStyled>{item.title}</TitleTextStyled>
+              <PayConteinerStyled>
+                <SalaryConteinerStyled>
+                  <SalaryTextStyled>{item.salary}</SalaryTextStyled>
+                  <PayTextStyled>Brutto, per year</PayTextStyled>
+                </SalaryConteinerStyled>
+                <DateConteinerStyled>
+                  <DateTextStyled>
+                    {`Posted ${getNumberOfDays(
+                      item.updatedAt,
+                      Date.now()
+                    )} days ago`}
+                  </DateTextStyled>
+                </DateConteinerStyled>
+              </PayConteinerStyled>
+
+              <DecorationConteinerStyled>
+                <TextStyled>{DescriptionSplit()[1]}</TextStyled>
+                <SubTitleTextStyled>{DescriptionSplit()[3]}</SubTitleTextStyled>
+                <TextStyled>{DescriptionSplit()[4]}</TextStyled>
+                <SubTitleTextStyled>{DescriptionSplit()[6]}</SubTitleTextStyled>
+
+                <ul>
+                  {DescriptionBenefits().map((items, index) => (
+                    <ItemTextStyled key={index}>
+                      <ItemDecorationStyled>
+                        <Bullet></Bullet>
+                      </ItemDecorationStyled>
+                      <TextBenefitsStyled>{items}</TextBenefitsStyled>
+                    </ItemTextStyled>
+                  ))}
+                </ul>
+              </DecorationConteinerStyled>
+              <ButtonConteinerStyled>
+                <ButtonStyled>Apply now</ButtonStyled>
+              </ButtonConteinerStyled>
+            </ArticleConteinerStyled>
+            <SectionImgInfoPositionStyled>
+              <SectionImgConteinerStyled>
+                <ImgTitleStyled>Attached images</ImgTitleStyled>
+                <ImgListStyled>
+                  {item.pictures.map((img, index) => (
+                    <ImgItemStyled key={index}>
+                      <ImgStyled src={img} alt={`pictures ${item.name}`} />
+                    </ImgItemStyled>
+                  ))}
+                </ImgListStyled>
+              </SectionImgConteinerStyled>
+              <section>
+                <TitleInfoStyled>Additional info</TitleInfoStyled>
+                <EmploymentTypeStyled>Employment type</EmploymentTypeStyled>
+                <EmploymentTypeListStyled>
+                  {item.employment_type.map((employee, index) => (
+                    <EmploymentTypeItemStyled key={index}>
+                      <EmploymentTypeTextStyled>
+                        {employee}
+                      </EmploymentTypeTextStyled>
+                    </EmploymentTypeItemStyled>
+                  ))}
+                </EmploymentTypeListStyled>
+                <BenefitsStyled>Benefits</BenefitsStyled>
+                <BenefitsListStyled>
+                  {item.benefits.map((benefits, index) => (
+                    <BenefitsItemStyled key={index}>
+                      <BenefitsTextStyled>{benefits}</BenefitsTextStyled>
+                    </BenefitsItemStyled>
+                  ))}
+                </BenefitsListStyled>
+              </section>
+            </SectionImgInfoPositionStyled>
+          </>
+        )}
+      </div>
       {item && (
-        <>
-          <ArticleConteinerStyled>
-            <TitleTextStyled>{item.title}</TitleTextStyled>
-            <PayConteinerStyled>
-              <SalaryConteinerStyled>
-                <SalaryTextStyled>{item.salary}</SalaryTextStyled>
-                <PayTextStyled>Brutto, per year</PayTextStyled>
-              </SalaryConteinerStyled>
-              <DateConteinerStyled>
-                <DateTextStyled>
-                  {`Posted ${getNumberOfDays(
-                    item.updatedAt,
-                    Date.now()
-                  )} days ago`}
-                </DateTextStyled>
-              </DateConteinerStyled>
-            </PayConteinerStyled>
-
-            <DecorationConteinerStyled>
-              <TextStyled>{DescriptionSplit()[1]}</TextStyled>
-              <SubTitleTextStyled>{DescriptionSplit()[3]}</SubTitleTextStyled>
-              <TextStyled>{DescriptionSplit()[4]}</TextStyled>
-              <SubTitleTextStyled>{DescriptionSplit()[6]}</SubTitleTextStyled>
-
-              <ul>
-                {DescriptionBenefits().map((items, index) => (
-                  <ItemTextStyled key={index}>
-                    <ItemDecorationStyled>
-                      <Bullet></Bullet>
-                    </ItemDecorationStyled>
-                    <TextBenefitsStyled>{items}</TextBenefitsStyled>
-                  </ItemTextStyled>
-                ))}
-              </ul>
-            </DecorationConteinerStyled>
-            <ButtonConteinerStyled>
-              <ButtonStyled>Apply now</ButtonStyled>
-            </ButtonConteinerStyled>
-          </ArticleConteinerStyled>
-          <SectionImgConteinerStyled>
-            <ImgTitleStyled>Attached images</ImgTitleStyled>
-            <ImgListStyled>
-              {item.pictures.map((img, index) => (
-                <ImgItemStyled key={index}>
-                  <ImgStyled src={img} alt={`pictures ${item.name}`} />
-                </ImgItemStyled>
-              ))}
-            </ImgListStyled>
-          </SectionImgConteinerStyled>
-          <section>
-            <TitleInfoStyled>Additional info</TitleInfoStyled>
-            <p>Employment type</p>
-            <ul>
-              {item.employment_type.map((employee, index) => (
-                <li key={index}>
-                  <p>{employee}</p>
-                </li>
-              ))}
-            </ul>
-            <p>Benefits</p>
-            <ul>
-              {item.benefits.map((benefits, index) => (
-                <li key={index}>
-                  <p>{benefits}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </>
-      )}
-      {item && (
-        <section>
-          <h2>Contacts</h2>
-          <div>
-            <GoogleMaps location={item.location} />
-          </div>
-        </section>
+        <GoogleMaps
+          location={item.location}
+          email={item.email}
+          phone={item.phone}
+        />
       )}
     </MainConteinerStyled>
   );

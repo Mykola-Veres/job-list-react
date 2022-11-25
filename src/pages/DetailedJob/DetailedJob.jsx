@@ -1,6 +1,7 @@
+import { Arrow } from 'assets/Arrow';
 import JobDetailed from 'components/JobDetailed';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 // import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
 // import * as JobDataAPI from "../../services/fetchJobData";
@@ -10,14 +11,16 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 // import Loader from "../../components/Loader";
 
 import { useFetchJobDataAPI } from '../../hooks/useFetchJobDataAPI';
+import {
+  ReturnToJobBoardConteinerStyled,
+  ReturnToJobBoardstyled,
+  ReturnToJobBoardTextStyled,
+} from './DetailedJob.staled';
 
 export default function JobDetailedPage() {
   // const [loading, setLoading] = useState(false);
   const location = useLocation();
   const { jobId } = useParams();
-  // const [movies, setMovies] = useState(null);
-
-  // const location2 = location;
 
   const { items, loading } = useFetchJobDataAPI();
 
@@ -38,16 +41,18 @@ export default function JobDetailedPage() {
   return (
     <div>
       {/* {loading && <Loader/>} */}
-
-      {items && (
-        <JobDetailed
-          item={items.find(item => item.id === jobId)}
-          // location={location2}
-        ></JobDetailed>
-      )}
-      <Link to={location?.state?.from ?? '/'} state={{ from: location }}>
-        RETURN TO JOB BOARD
-      </Link>
+      {items && <JobDetailed item={items.find(item => item.id === jobId)} />}
+      <ReturnToJobBoardConteinerStyled>
+        <ReturnToJobBoardstyled
+          to={location?.state?.from ?? '/'}
+          state={{ from: location }}
+        >
+          <Arrow />
+          <ReturnToJobBoardTextStyled>
+            RETURN TO JOB BOARD
+          </ReturnToJobBoardTextStyled>
+        </ReturnToJobBoardstyled>
+      </ReturnToJobBoardConteinerStyled>
     </div>
   );
 }
