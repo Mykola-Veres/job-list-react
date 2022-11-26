@@ -1,5 +1,4 @@
 import GoogleMaps from '../GoogleMaps/GoogleMaps';
-import { useLocation, useParams } from 'react-router-dom';
 // import ImageDummy from "../../images/ImageDummy.png";
 import { getNumberOfDays } from 'utils/countDay';
 import { Bookmarker } from 'assets/Bookmark';
@@ -46,54 +45,43 @@ import {
 } from './JobDetailed.styled';
 import { Bullet } from 'assets/Bullet';
 
-// type Item = {
-//   address: string;
-//   benefits: Array<string>;
-//   createdAt: string;
-//   description: string;
-//   email: string;
-//   employment_type: Array<string>;
-//   id: string;
-//   location: object;
-//   name: string;
-//   phone: string;
-//   pictures: Array<string>;
-//   salary: string;
-//   title: string;
-//   updatedAt: string;
-// }
+interface Props {
+  item: {
+    address: string;
+    benefits: Array<string>;
+    createdAt: string;
+    description: string;
+    email: string;
+    employment_type: Array<string>;
+    id: string;
+    location: { lat: number; long: number };
+    name: string;
+    phone: string;
+    pictures: Array<string>;
+    salary: string;
+    title: string;
+    updatedAt: string;
+  };
+}
 
-// interface Props {
-//   item: Item
-// }
-
-// interface Props {
-//   item: {
-//     id: string,
-//     name: string,
-//     title: string,
-//   };
-// }
-
-export default function JobDetailed({ item }) {
-  const { movieId } = useParams();
-  const locationCast = useLocation();
-
-  function DescriptionSplit() {
+export default function JobDetailed({ item }: Props) {
+  function DescriptionSplit(): string[] {
     if (item) {
       const res = /\n/;
       const descriptionList = item.description.split(res);
       return descriptionList;
     }
+    return [];
   }
 
-  function DescriptionBenefits() {
+  function DescriptionBenefits(): string[] {
     if (item) {
       const res = /\t/;
       const benefitsList = item.description.split(res);
       const benefitsListItem = benefitsList[1].split('.');
       return benefitsListItem.slice(0, benefitsListItem.length - 1);
     }
+    return [];
   }
   return (
     <MainConteinerStyled>

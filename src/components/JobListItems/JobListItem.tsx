@@ -25,13 +25,13 @@ import {
 // import { useLocation } from "react-router-dom";
 // import noFilm from '../../images/noFilm.jpg';
 
-type Item = {
+type TItem = {
   address: string;
   benefits: Array<string>;
   createdAt: string;
   description: string;
   email: string;
-  employment_type: Array<string>;
+  employment_type: string[];
   id: string;
   location: object;
   name: string;
@@ -43,7 +43,7 @@ type Item = {
 };
 
 interface Props {
-  items: Item[];
+  items: TItem[];
 }
 
 export default function JobListItem({ items }: Props) {

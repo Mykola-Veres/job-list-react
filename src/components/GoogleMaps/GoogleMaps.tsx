@@ -35,7 +35,13 @@ const defaultOption = {
   styles: defaultTheme,
 };
 
-export default function GoogleMaps({ location, email, phone }) {
+interface Props {
+  location: { lat: number; long: number };
+  email: string;
+  phone: string;
+}
+
+export default function GoogleMaps({ location, email, phone }: Props) {
   const [locations, setLocations] = useState('');
   const initialValue = {
     lat: location.lat,

@@ -1,4 +1,4 @@
-export function getNumberOfDays(start, end) {
+export function getNumberOfDays(start: string, end: number) {
   const date1 = new Date(start);
   const date2 = new Date(end);
   const oneDay = 1000 * 60 * 60 * 24;

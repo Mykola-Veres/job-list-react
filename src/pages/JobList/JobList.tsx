@@ -13,7 +13,7 @@ export default function JobList() {
   const firstJobIndex = lastJobsIndex - jobsPerPage;
   const currentJobList = items.slice(firstJobIndex, lastJobsIndex);
 
-  function paginete(pageNumber) {
+  function paginete(pageNumber: number): void {
     setCurranrJobsPage(pageNumber + 1);
   }
 

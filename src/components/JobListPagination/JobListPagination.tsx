@@ -1,6 +1,5 @@
 import { ArrowLeft } from 'assets/ArrowLeft';
 import { ArrowRight } from 'assets/ArrowRight';
-import { NavLink } from 'react-router-dom';
 import {
   LeftButtonStyled,
   PaginationConteinerStyled,
@@ -10,13 +9,21 @@ import {
   RightButtonStyled,
 } from './JobListPagination.styled';
 
+interface Props {
+  totalJobs: number;
+  jobsPerPage: number;
+  paginete: (number: number) => void;
+  setCurranrJobsPage: React.Dispatch<React.SetStateAction<number>>;
+  curranrJobsPage: number;
+}
+
 export default function JobListPagination({
   totalJobs,
   jobsPerPage,
   paginete,
   setCurranrJobsPage,
   curranrJobsPage,
-}) {
+}: Props) {
   const numberPages = [];
 
   for (let index = 0; index < totalJobs / jobsPerPage; index++) {

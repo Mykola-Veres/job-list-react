@@ -9,7 +9,7 @@ export function fetchJobData() {
   return fetchJobData;
 }
 
-export function fetchJobListLocation(lat, lng) {
+export function fetchJobListLocation(lat: number, lng: number) {
   const fetchJobData = axios
     .get(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyB8Wu_dFt7tbQ8E0PJcJmpEL2HcPBAqhiA`
