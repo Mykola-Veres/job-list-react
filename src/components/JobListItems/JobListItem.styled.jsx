@@ -7,7 +7,7 @@ export const ListJobStyled = styled.ul`
   align-items: center;
   flex-direction: column;
   padding-top: 29px;
-  padding-bottom: 49px;
+  padding-bottom: 47px;
   padding-left: 9px;
   padding-right: 9px;
   margin-left: auto;

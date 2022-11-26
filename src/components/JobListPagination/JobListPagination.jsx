@@ -1,4 +1,14 @@
+import { ArrowLeft } from 'assets/ArrowLeft';
+import { ArrowRight } from 'assets/ArrowRight';
 import { NavLink } from 'react-router-dom';
+import {
+  LeftButtonStyled,
+  PaginationConteinerStyled,
+  PaginationItemStyled,
+  PaginationLinkStyled,
+  PaginationListStyled,
+  RightButtonStyled,
+} from './JobListPagination.styled';
 
 export default function JobListPagination({
   totalJobs,
@@ -28,28 +38,29 @@ export default function JobListPagination({
   }
 
   return (
-    <div>
-      <ul>
+    <PaginationConteinerStyled>
+      <LeftButtonStyled onClick={prevPage} disabled={false}>
+        <ArrowLeft />
+      </LeftButtonStyled>
+      <PaginationListStyled>
         {totalJobs &&
           numberPages.map(number => (
-            <li key={number}>
-              <NavLink
+            <PaginationItemStyled key={number}>
+              <PaginationLinkStyled
                 to={`/`}
                 onClick={() => {
                   paginete(number);
                 }}
               >
                 {number + 1}
-              </NavLink>
-            </li>
+              </PaginationLinkStyled>
+            </PaginationItemStyled>
           ))}
-      </ul>
-      <button onClick={prevPage} disabled={false}>
-        prev page
-      </button>
-      <button onClick={nextPage} disabled={false}>
-        next page
-      </button>
-    </div>
+      </PaginationListStyled>
+
+      <RightButtonStyled onClick={nextPage} disabled={false}>
+        <ArrowRight />
+      </RightButtonStyled>
+    </PaginationConteinerStyled>
   );
 }
