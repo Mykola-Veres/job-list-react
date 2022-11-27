@@ -2,6 +2,7 @@ import { useState } from 'react';
 import JobListItem from '../../components/JobListItems';
 import { useFetchJobDataAPI } from '../../hooks/useFetchJobDataAPI';
 import JobListPagination from 'components/JobListPagination';
+import Loader from 'components/Loader';
 
 export default function JobList() {
   const { items, loading } = useFetchJobDataAPI();
@@ -19,9 +20,7 @@ export default function JobList() {
 
   return (
     <div>
-      {/*
-      {loading && <Loader/>}
-      */}
+      {loading && <Loader />}
       {items && (
         <>
           <JobListItem items={currentJobList}></JobListItem>

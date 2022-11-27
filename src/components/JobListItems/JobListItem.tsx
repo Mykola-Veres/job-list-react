@@ -22,8 +22,6 @@ import {
   TextConteinerStyled,
   TitleJobStyled,
 } from './JobListItem.styled';
-// import { useLocation } from "react-router-dom";
-// import noFilm from '../../images/noFilm.jpg';
 
 type TItem = {
   address: string;

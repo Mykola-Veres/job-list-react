@@ -61,13 +61,12 @@ export default function GoogleMaps({ location, email, phone }: Props) {
           location.long
         );
         setLocations(decode);
-        console.log('decode', decode);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchJobDataAPI();
   }, [location.lat, location.long]);
-
-  console.log('locations', locations);
 
   return (
     <MapSectionConteinerStyled>

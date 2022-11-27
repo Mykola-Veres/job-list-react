@@ -1,5 +1,4 @@
 import GoogleMaps from '../GoogleMaps/GoogleMaps';
-// import ImageDummy from "../../images/ImageDummy.png";
 import { getNumberOfDays } from 'utils/countDay';
 import { Bookmarker } from 'assets/Bookmark';
 import { Share } from 'assets/Share';
@@ -150,7 +149,9 @@ export default function JobDetailed({ item }: Props) {
                 <ImgListStyled>
                   {item.pictures.map((img, index) => (
                     <ImgItemStyled key={index}>
-                      <ImgStyled src={img} alt={`pictures ${item.name}`} />
+                      {(
+                        <ImgStyled src={img} alt={`pictures ${item.name}`} />
+                      ) || <ImgStyled src="{noImage}" alt="no pictures" />}
                     </ImgItemStyled>
                   ))}
                 </ImgListStyled>

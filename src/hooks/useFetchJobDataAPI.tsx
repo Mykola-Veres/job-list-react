@@ -28,8 +28,8 @@ export const useFetchJobDataAPI = () => {
       try {
         const items = await JobDataAPI.fetchJobData();
         setItems(items);
-        console.log(items);
       } catch (error) {
+        console.log('error', error);
       } finally {
         setLoading(false);
       }
