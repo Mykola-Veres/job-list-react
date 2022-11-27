@@ -175,6 +175,7 @@ export const ButtonStyled = styled.button`
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
+  cursor: pointer;
 `;
 export const ButtonConteinerStyled = styled.div`
   display: flex;
